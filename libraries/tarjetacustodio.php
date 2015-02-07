@@ -18,7 +18,7 @@ class Tarjetacustodio {
     
     function __construct(){
         $this->ci = & get_instance();
-        $this->ci->load->library('contaconfigcuentas');
+        $this->ci->load->library('common/contaconfigcuentas');
         $this->obj_contaconfigcuentas = new Contaconfigcuentas();        
     }    
 

@@ -19,6 +19,22 @@ class Asientocontable {
         $this->ci = & get_instance();
     }    
  
+    public function save_ac($tipotransaccion_cod, $doc_id, $detalle = '') {
+        $ac_data = array(
+            'anio' => date('Y', time()),
+            'mes_id' => date('m', time()),
+            'fecha' => date('Y-m-d', time()),
+            'hora' => date('H:i:s', time()),
+            'estado' => 1,
+            'user_id' => $this->ci->user->id,
+            'tipotransaccion_cod' => $tipotransaccion_cod,
+            'doc_id' => $doc_id,
+            'detalle' => $detalle
+        );
+        $ac_id = $this->ci->generic_model->save($ac_data,'bill_asiento_contable');
+        return $ac_id;
+    }
+    
     public function get_ac_data($tipo_trans, $doc_id, $estado = 1) {
         $join_cluase = array(
                '0' => array('table'=>'bill_asiento_contable_det acd','condition'=>'ac.id = acd.asiento_contable_id'),
