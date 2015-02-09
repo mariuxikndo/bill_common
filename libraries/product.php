@@ -81,4 +81,34 @@ class Product {
                 );            
         return $res;
     }
+    
+    public function get_precio_prod($item_id, $price_tipo) {
+        $fields = 'p.codigo, p.stockactual, p.costopromediokardex, p.costoultimokardex, p.ajuste1, p.ajuste2, p.productogrupo_codigo grupo_id, p.descmaxporcent descmaxporcent, gp.utilidad utilidad';
+        $join_cluase = array(
+            '0' => array('table'=>'bill_grupoprecio gp', 'condition'=>'gp.productogrupo_id = p.productogrupo_codigo AND gp.tiposprecio_id = "'.$price_tipo.'"', 'type'=>'left')
+        );
+        $where_data = array('p.codigo' => $item_id);
+        $p = $this->ci->generic_model->get_join('billing_producto p', $where_data, $join_cluase, $fields, 1, null, null );
+        
+        $utilidadventaprod = get_settings('DEFAULT_UTILIDAD');
+        if(!empty($p->utilidad)){
+            $utilidadventaprod = $p->utilidad;
+        }
+        
+        $precioprod = $p->costopromediokardex + $p->ajuste1 + $p->ajuste2 + ( ($p->costopromediokardex + $p->ajuste1 + $p->ajuste2) * $utilidadventaprod )/100;
+
+        $iva_porcent = get_settings('IVA');            
+        $precioprod_iva = $precioprod + ( $precioprod * $iva_porcent ) / 100;
+
+            $precio_minimo = $precioprod;
+                if($p->descmaxporcent > 0){
+                    $val_division_desc = ($p->descmaxporcent / 100) + 1;
+                    $desc_prod = $precioprod - ($precioprod / $val_division_desc);                                                        
+                    $precio_minimo = $precioprod - $desc_prod;                            
+                }                            
+        $precios_prod = array('price'=>$precioprod,'price_min'=>$precio_minimo,'price_iva'=>$precioprod_iva);
+
+        return $precios_prod;
+    }
+    
 }
