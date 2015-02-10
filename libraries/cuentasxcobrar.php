@@ -19,6 +19,40 @@ class Cuentasxcobrar {
         $this->ci = & get_instance();
     }    
 
+    /* Sumamos una nueva cuenta por cobrar al cliente */
+    public function add_cxc( $cxc_val, $client_id, $tipotransaccion_cod, $doc_id, $vence_cuota, $tipopago_cod, $observaciones, $idcuota = 1, $nrocuotas = 1, $vencecadadias = 1 ) {
+            $saldo_client = $this->get_client_saldo($client_id);
+            $new_saldo_client = $saldo_client + $cxc_val; /* restamos el valor del cheque*/                                          
+                                
+            /* Registramos la cuenta x cobrar */
+                $cxc = array(
+                    'doc_id' => $doc_id,
+                    'tipotransaccion_cod' => $tipotransaccion_cod,
+                    'tipopago_id' => $tipopago_cod,
+                    'total_neto' => $cxc_val,
+                    'vencecadadias' => $vencecadadias,
+                    'nrocuotas' => $nrocuotas,
+                    'idcuota' => $idcuota,
+                    'cuota_neto' => $cxc_val,
+                    'vence_cuota' => $vence_cuota,
+                    'balance' => $cxc_val,
+                    'observaciones' => $observaciones,
+                    'valor_cobrado' => 0,
+                    'fecha_cobro' => null,
+                    'valor_cobrado_bruto' => 0,
+                    'cambio' => 0,
+                    'saldototal' => $cxc_val,
+                    'fecha' => date('Y-m-d',time()),
+                    'hora' => date('H:i:s',time()), 
+                    'client_id' => $client_id, 
+                    'saldo_client' => $new_saldo_client,
+                );
+                $cxc_id = $this->ci->generic_model->save($cxc,'bill_cxc');
+                $this->update_cxc_saldos($client_id, $new_saldo_client);                
+                
+                return $cxc_id;
+    }
+    
     public function update_cxc_saldos($client_id, $new_saldo) {
         $res = false;
         $count_sb = $this->ci->generic_model->count_all_results( 'bill_cxc_saldos', array( 'client_id'=>$client_id ) );

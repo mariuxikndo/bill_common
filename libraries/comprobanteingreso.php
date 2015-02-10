@@ -20,7 +20,7 @@ class Comprobanteingreso {
     function __construct(){
         $this->ci = & get_instance();
         $this->ci->load->library('number_letter');
-        $this->ci->load->library('asientocontable');
+        $this->ci->load->library('common/asientocontable');
         $this->obj_number_letter = new Number_letter();
         $this->obj_asientocontable = new Asientocontable();
     }
@@ -52,7 +52,8 @@ class Comprobanteingreso {
         
         $res['recibo'] = $this->ci->generic_model->get( 'bill_recibo', array('doc_id'=>$doc_id,'tipotransaccion_cod'=>$tipotransaccion_cod), '', null, 1 );
         $res['cliente'] = $this->ci->generic_model->get_by_id('billing_cliente',$res['recibo']->client_id,'','PersonaComercio_cedulaRuc');
-        $res['data_asiento'] = $this->ci->asientocontable->get_ac_data($tipotransaccion_cod, $doc_id);
+        $res['data_asiento'] = $this->obj_asientocontable->get_ac_data($tipotransaccion_cod, $doc_id);
+        
         $this->ci->load->view('comprobantes/comprobante_ingreso',$res);
     }
     

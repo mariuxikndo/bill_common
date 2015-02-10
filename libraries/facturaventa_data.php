@@ -116,11 +116,11 @@ class Facturaventa_data {
                 }
             }elseif($f->puntoventaempleado_tiposcomprobante_cod == '04'){
                 if($f->estado == 1){
-                    $this->ci->load->view('nota_credito_venta/head_ndc_pendiente',$res_head);
+                    $this->ci->load->view('ndc_venta/head_ndc_pendiente',$res_head);
                 }  elseif ($f->estado == 2) {
-                    $this->ci->load->view('nota_credito_venta/head_ndc_archivada',$res_head);
+                    $this->ci->load->view('ndc_venta/head_ndc_archivada',$res_head);
                 }  elseif ($f->estado < 0) {
-                    $this->ci->load->view('nota_credito_venta/head_ndc_anulada',$res_head);
+                    $this->ci->load->view('ndc_venta/head_ndc_anulada',$res_head);
                 }
             }
             $this->ci->load->view('comprobantes/factura_venta', $data);

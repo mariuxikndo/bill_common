@@ -49,6 +49,7 @@ class Asientocontable {
                     $join_cluase, 
                     'ac.id, ac.anio, ac.fecha ac_fecha, ac.hora ac_hora, acd.debito, acd.credito, acd.detalle, acd.cuenta_cont_id, acd.tipo_pago, acd.doc_id acd_doc_id,acd.doc_id_pago, pl.nombre cta_name, empl.nombres user_nombres, empl.apellidos user_apellidos'
                 );
+
         return $ac_data;
     }
     
