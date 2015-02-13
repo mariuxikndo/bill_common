@@ -37,7 +37,7 @@ class Autosuggest extends MX_Controller{
             } else {
                     echo '{"id":"--","name":"No hay resultados para '.$param.'"}';
             }
-        }
+        }        
         
         function get_proveedor_by_name( $param ) {
             $this->load->model('proveedor_model');            
@@ -51,7 +51,8 @@ class Autosuggest extends MX_Controller{
         }
         
         function get_proveedor_by_ci( $param ) {
-            $res = $this->generic_model->get('billing_proveedor', array('PersonaComercio_cedulaRuc'=>$param), $fields = 'PersonaComercio_cedulaRuc ci, nombres value', null, 15 );            
+//            $res = $this->generic_model->get('billing_proveedor', array('PersonaComercio_cedulaRuc'=>$param), 'PersonaComercio_cedulaRuc ci, nombres value', null, 15 );            
+            $res = $this->generic_model->get('billing_proveedor', array('PersonaComercio_cedulaRuc'=>$param), 'id ci, PersonaComercio_cedulaRuc ruc, CONCAT_WS(" ",nombres," ",apellidos) value', null, 15 );            
             if(!empty($res)) {
                     echo json_encode($res);
             } else {
