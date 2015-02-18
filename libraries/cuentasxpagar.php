@@ -50,6 +50,55 @@ class Cuentasxpagar {
                 return $cxc_id;
     }
     
+    public function bajar_cxp($compra_id, $total_recibido_pago, $proveedor_id,$tipotransaccion_cod) {
+        $cxp = $this->ci->generic_model->get_by_id('bill_cxp', $compra_id, 'balance,saldototal', 'compra_id');
+        $new_balance = $cxp->balance - $total_recibido_pago;
+        $new_saldototal = $cxp->saldototal - $total_recibido_pago;
+
+        $data_set = array(
+            'balance' => $new_balance,
+            'saldototal' => $new_saldototal,
+            'valor_pagado' => $total_recibido_pago
+        );
+
+        $res = $this->ci->generic_model->update( 'bill_cxp', $data_set, array('compra_id'=>$compra_id) );
+
+        /*****************************************************************/
+            /* 
+             * Obtenemos el ultimo saldo que tenemos de la deuda con el proveedor, para luego actualizar este valor 
+             */
+        $saldo_proveedor = $this->get_proveedor_saldo($proveedor_id);        
+        $new_saldo_proveedor = $saldo_proveedor - $total_recibido_pago; /* restamos el valor del cheque*/                            
+
+            /* Registramos la cuenta x cobrar */
+            $cxp = array(
+                'compra_id' => $compra_id,
+                'tipopago_id' => null,
+                'totaldeuda' => $total_recibido_pago * -1,
+                'vencecadadias' => 0,
+                'nrocuotas' => 0,
+                'idcuota' => 0,
+                'valorcuotaindividual' => $total_recibido_pago * -1,
+                'vencecuotaindividual' => date('Y-m-d', time()),
+                'balance' => 0,
+                'observaciones' => 'Se aplica el pago a la CxP',
+                'valor_pagado' => 0,
+                'fechapago' => date('Y-m-d', time()),
+                'saldototal' => $total_recibido_pago * -1,
+                'fecha' => date('Y-m-d',time()),
+                'hora' => date('H:i:s',time()), 
+                'proveedor_id' => $proveedor_id, 
+                'saldo_proveedor' => $new_saldo_proveedor, 
+                'tipotransaccion_cod' => $tipotransaccion_cod, 
+            );
+            $cxp_id = $this->ci->generic_model->save($cxp,'bill_cxp');  
+
+            $this->update_cxp_saldos($proveedor_id, $new_saldo_proveedor);              
+        /*****************************************************************/ 
+            
+            return $cxp_id;
+    }
+    
     public function update_cxp_saldos($proveedor_id, $new_saldo) {
         $res = false;
         $count_sb = $this->ci->generic_model->count_all_results( 'bill_cxp_saldos', array( 'proveedor_id'=>$proveedor_id ) );

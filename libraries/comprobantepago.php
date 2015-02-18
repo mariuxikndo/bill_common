@@ -54,7 +54,6 @@ class Comprobantepago {
 //        $res['recibo'] = $this->ci->generic_model->get( 'bill_comprob_pago', array('doc_id'=>$doc_id,'tipotransaccion_cod'=>$tipotransaccion_cod), '', null, 1 );
         $res['comprob_pago'] = $this->ci->generic_model->get('bill_comprob_pago', array('doc_id'=>$doc_id,'estado'=>'1','tipotransaccion_cod'=>$tipotransaccion_cod), '', null, 1 );        
         
-//        print_r($res['comprob_pago']);
         $res['proveedor'] = $this->ci->generic_model->get_by_id('billing_proveedor',$res['comprob_pago']->proveedor_id);
         $res['data_asiento'] = $this->obj_asientocontable->get_ac_data($tipotransaccion_cod, $doc_id);
         
