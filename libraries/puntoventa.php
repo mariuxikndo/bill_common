@@ -39,7 +39,7 @@ class Puntoventa {
     
     /* incrementa el valor de la secuencia en uno */
     public function incrementar_secuencia($establecimiento, $pemision, $tipocomprobante_cod) {
-        $pv = $this->ci->generic_model->get_data( 
+        $pv = $this->ci->generic_model->get_data(
                 'billing_puntoventaempleado', 
                 array('establecimiento'=>$establecimiento,'puntoemision'=>$pemision, 'tiposcomprobante_cod'=>$tipocomprobante_cod), 
                 'secuenciaultima', 

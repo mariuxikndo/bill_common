@@ -7,7 +7,11 @@
             if($factura->estado == 1){
                 echo tagcontent('div', '<strong>FACT. PENDIENT No.</strong>'.$factura->codigofactventa, array('class'=>'col-md-6'));
             }elseif($factura->estado == 2){
-                echo tagcontent('div', '<strong>PRE-FACTURA No.</strong>'.$factura->codigofactventa, array('class'=>'col-md-6'));
+                if($factura->autorizado_sri == 2){
+                    echo tagcontent('div', '<strong>FACTURA No.</strong>'.$factura->establecimiento.$factura->puntoemision.'-'.str_pad($factura->secuenciafactventa, 9, '0', STR_PAD_LEFT), array('class'=>'col-md-6'));                    
+                }else{
+                    echo tagcontent('div', '<strong>PRE-FACTURA No.</strong>'.$factura->codigofactventa, array('class'=>'col-md-6'));
+                }
             }
         ?>
         
