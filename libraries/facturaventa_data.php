@@ -76,7 +76,7 @@ class Facturaventa_data {
     public function obtener_datos_generales($idBod, $idEmp_vend, $idTec, $idUser, $tipopago) {
         $fields1 = array('descripcion', "nombre");
         $bodega = $this->ci->generic_model->get('billing_bodega', array('id' => $idBod), $fields1, 0);
-        $datos_gen['bodega'] = $bodega[0]->descripcion;
+        $datos_gen['bodega'] = $bodega[0]->nombre;
         $fields2 = array('nombres', 'apellidos');
         $vendedor = $this->ci->generic_model->get('billing_empleado', array('id' => $idEmp_vend), $fields2, 0);
         $datos_gen['emp_vend'] = $vendedor[0]->nombres . " " . $vendedor[0]->apellidos;
@@ -123,7 +123,7 @@ class Facturaventa_data {
                     $this->ci->load->view('ndc_venta/head_ndc_anulada',$res_head);
                 }
             }
-            $this->ci->load->view('comprobantes/factura_venta', $data);
+            $this->ci->load->view('common/comprobantes/factura_venta', $data);
         }     
 
 }
