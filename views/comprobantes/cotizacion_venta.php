@@ -65,7 +65,7 @@
             </tbody>
         </table>
 
-        <div  class="col-md-5">
+        <div  class="col-md-9 pull-left">
             Dirección: <?php echo $cliente_data[0]->direccion; ?><br>
             Teléfono: <?php echo $cliente_data[0]->telefonos; ?><br>
             Email: <?php echo $cliente_data[0]->email; ?><br><br>
