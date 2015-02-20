@@ -30,7 +30,7 @@
         <br>
         <table class="table table-striped table-condensed" style="font-size:11px">
             <tr>
-                <td>CLIENTE: <?php echo $cliente_data[0]->nombres; ?></td>
+                <td>CLIENTE: <?php echo $cliente_data[0]->nombres.' '.$cliente_data[0]->apellidos; ?></td>
                 <td>CI/RUC: <?php echo $cliente_data[0]->PersonaComercio_cedulaRuc; ?></td>
             </tr>
         </table>
@@ -110,7 +110,7 @@
                     <td>
                         <div>
                             <hr>
-                            <?php echo $cliente_data[0]->nombres; ?><br>
+                            <?php echo $cliente_data[0]->nombres.' '.$cliente_data[0]->apellidos; ?><br>
                             <b>Firma Cliente</b><br>
                         </div> 
                     </td>

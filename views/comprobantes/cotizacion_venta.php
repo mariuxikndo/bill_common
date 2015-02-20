@@ -126,7 +126,3 @@
         
     <?php
         echo Close('div');
-
-
-
-
