@@ -111,4 +111,17 @@ class Product {
         return $precios_prod;
     }
     
+    
+    public function get_product_data($product_id) {
+        $fields = 'codigo, costopromediokardex, costoultimokardex, esServicio';
+        $product_data = $this->ci->generic_model->get_data( 
+                    'billing_producto', 
+                    array('codigo'=>$product_id), 
+                    $fields, 
+                    null, 
+                    1
+                );
+        return $product_data;          
+    }
+    
 }

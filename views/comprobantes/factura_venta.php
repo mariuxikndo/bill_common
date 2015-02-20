@@ -88,8 +88,8 @@
             
             echo Open('div',array('class'=>'col-md-3 pull-right'));
                 echo Open('table',array('class'=>'table table-condensed','style'=>'font-size:11px'));
-                    echo tagcontent('tr', tagcontent('td', '<span class="pull-right">SUBTOTAL 12%</span>').  tagcontent('td', '<span class="pull-right">'.  number_decimal($factura->tarifacerobruto).'</span>' ));
-                    echo tagcontent('tr', tagcontent('td', '<span class="pull-right">SUBTOTAL 0%:</span>').  tagcontent('td', '<span class="pull-right">'.  number_decimal($factura->tarifadocebruto).'</span>' ));
+                    echo tagcontent('tr', tagcontent('td', '<span class="pull-right">SUBTOTAL 12%</span>').  tagcontent('td', '<span class="pull-right">'.  number_decimal($factura->tarifadocebruto).'</span>' ));
+                    echo tagcontent('tr', tagcontent('td', '<span class="pull-right">SUBTOTAL 0%:</span>').  tagcontent('td', '<span class="pull-right">'.  number_decimal($factura->tarifacerobruto).'</span>' ));
 
                     echo tagcontent('tr', tagcontent('td', '<span class="pull-right">Subtotal</span>').  tagcontent('td', '<span class="pull-right">'.  number_decimal($factura->subtotalBruto).'</span>' ));/* Subotal bruto - antes del descuento */
                     echo tagcontent('tr', tagcontent('td', '<span class="pull-right">TOTAL Recargo</span>').  tagcontent('td', '<span class="pull-right">'.  number_decimal($factura->recargovalor).'</span>' ));
