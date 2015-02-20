@@ -41,7 +41,7 @@ class Retencioncompra {
                     'proveedor_id' => $proveedor_id,
                     'establecimiento' => 'NNN', /* no se requiere estalecimieno ni punto de emision, solo es para sacar el reporte*/
                     'pemision' => 'NNN',
-                    'nro' => '0',
+                    'nro' => time(),
                     'empleado_id' => $this->ci->user->id,
                     'estado' => '1', /* 1 = Activa, 2 = anulada*/
                     'doc_id' => $compra_id,
