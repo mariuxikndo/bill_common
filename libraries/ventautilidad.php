@@ -25,9 +25,6 @@ class Ventautilidad {
      * $utilidad = '-' = resta la utlidad     
      */
     public function save_utilidad_venta($doc_id, $costo, $pvp_bienes, $pvp_servicios, $tipotransaccion_cod, $utilidad = '+') {
-        
-        echo '<br/>Bienes:'.$pvp_bienes. 'Servicios:'. $pvp_servicios.'<br/>';
-        
         $res = false;
         /* No comparamos con $pvp_bienes porque este si podria venir en cero en caso de los ajustes de salida */
         if($costo > 0){
@@ -43,15 +40,17 @@ class Ventautilidad {
             );
             $res = $this->ci->generic_model->save($data, 'bill_venta_utilidad');            
         }
-        echo 'FUERA'.$pvp_servicios.'******************';
+
         /* La utililidad negativa que por lo general es por ajuste de salida, re registra como servicio en negativo */
         if($pvp_servicios > 0){
             if($utilidad == '-'){
                 $pvp_servicios = $pvp_servicios * -1;
                 $utilidad_porcent = 0;
+            }else{
+                /* si no es ajuste de salida, y es venta, la utilidad por un servicio es del 100%*/
+                $utilidad_porcent = 100;
             }
         
-            echo 'Dentro'.$pvp_servicios.'AAAAAAAAAAAA';
             $data = array(
                 'venta_id' => $doc_id,
                 'costo' => 0,
@@ -60,7 +59,7 @@ class Ventautilidad {
                 'utilidad_porcent' => $utilidad_porcent,
                 'tipotransaccion_cod' => $tipotransaccion_cod,
             );
-            echo 'Guardando en bill_venta_utilidad';
+
             $res = $this->ci->generic_model->save($data, 'bill_venta_utilidad');            
         }
         
@@ -108,9 +107,13 @@ class Ventautilidad {
             $total_utilidad = $this->get_utilidad_total($venta_id,$tipotransaccion_cod);            
             $costo_total = $this->get_costo_total($venta_id,$tipotransaccion_cod);
             
-            $utilidad_porcent = ($total_utilidad * 100)/$costo_total;
-            
-            return $utilidad_porcent;            
+            if($costo_total > 0){
+                $utilidad_porcent = ($total_utilidad * 100)/$costo_total;                
+                return $utilidad_porcent;                            
+            }else{ /* Si no tiene costo, la utilidad es del 100%*/
+                return 100;
+            }
+
         }    
 
 }

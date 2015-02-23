@@ -17,6 +17,17 @@ class Stockbodega {
     function __construct(){
         $this->ci = & get_instance();
     }
+    
+    /* 
+     * El stock disponible nos presenta el stock menos las reservas del producto realizadas en la bodega 
+     */
+    public function get_stock_bod_disponibe($bodega_id, $product_id) {
+        $stock_bod = $this->get_stock_bodega($bodega_id, $product_id);
+        $reserva_bod = $this->get_reserva_bodega($bodega_id, $product_id);
+        
+        $stock_disp = $stock_bod - $reserva_bod;
+        return $stock_disp;
+    }
 
     /* obtenemos el stock actual en la bodega seleccionada*/
         public function get_stock_bodega($bodega_id, $product_id) {
