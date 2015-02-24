@@ -1,5 +1,6 @@
         <?php
                
+        echo Open('div', array('id'=>'factventaprint_view','class'=>'container', 'style'=>'font-family:monospaced;font-size:11px'));                
         $logo = Image(base_url('img/logo1.png'), array('alt'=>'master pc'));
         echo tagcontent('div', $logo, array('class'=>'col-md-6'));
         
