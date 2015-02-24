@@ -18,12 +18,27 @@ class Product {
     function __construct(){
         $this->ci = & get_instance();
     }    
-
+    
     /* El stock total del producto se encuentra directamente en la tabla billing_producto */
     public function get_stock($product_id) {
         $res = $this->ci->generic_model->get_val_where('billing_producto', array('codigo'=>$product_id),'stockactual', null, 0);
         return $res;        
     }
+
+    /* Obtiene el stock, restando las reservas */
+    public function get_stock_disponible($product_id) {
+        $stock = $this->get_stock($product_id);
+        $reserva = $this->get_reserva($product_id);
+        
+        $stock_disp = $stock - $reserva;
+        return $stock_disp;
+    }    
+    
+    /* obtenemos el stock total en reserva */
+        public function get_reserva($product_id) {
+           $tot_reservas = $this->ci->generic_model->sum_table_field( 'billing_stockbodega', 'reserva', array('producto_codigo'=>$product_id) );
+           return $tot_reservas;
+        }
     
     public function update_stock($product_id, $new_stock) {
 //        echo 'codigo:'.$product_id, ' new_stock: '.$new_stock ;
@@ -121,7 +136,7 @@ class Product {
                     null, 
                     1
                 );
-        return $product_data;          
+        return $product_data;
     }
     
 }
