@@ -101,24 +101,26 @@ class Facturaventa_data {
         $data['cliente_data'] = $cliente;
         $data['datos_observ'] = $this->obtener_datos_generales($f->bodega_id, $f->empleado_vendedor, $f->tecnico_id, $f->user_id, $f->tipo_pago);
 
-//        $res_head['fact_data'] = $f;
-//        if ($f->puntoventaempleado_tiposcomprobante_cod == '01') {
-//            if ($f->estado == 1) {
-//                $this->ci->load->view('ventas/head_fact_pendiente', $res_head);
-//            } elseif ($f->estado == 2) {
-//                $this->ci->load->view('ventas/head_fact_archivada', $res_head);
-//            } elseif ($f->estado < 0) {
-//                $this->ci->load->view('ventas/head_fact_anulada', $res_head);
-//            }
-//        } elseif ($f->puntoventaempleado_tiposcomprobante_cod == '04') {
-//            if ($f->estado == 1) {
-//                $this->ci->load->view('ndc_venta/head_ndc_pendiente', $res_head);
-//            } elseif ($f->estado == 2) {
-//                $this->ci->load->view('ndc_venta/head_ndc_archivada', $res_head);
-//            } elseif ($f->estado < 0) {
-//                $this->ci->load->view('ndc_venta/head_ndc_anulada', $res_head);
-//            }
-//        }
+        $res_head['fact_data'] = $f;
+        $res_head['cli']=$cliente;
+        
+        if ($f->puntoventaempleado_tiposcomprobante_cod == '01') {
+            if ($f->estado == 1) {
+                $this->ci->load->view('ventas/head_fact_pendiente', $res_head);
+            } elseif ($f->estado == 2) {
+                $this->ci->load->view('ventas/head_fact_archivada', $res_head);
+            } elseif ($f->estado < 0) {
+                $this->ci->load->view('ventas/head_fact_anulada', $res_head);
+            }
+        } elseif ($f->puntoventaempleado_tiposcomprobante_cod == '04') {
+            if ($f->estado == 1) {
+                $this->ci->load->view('ndc_venta/head_ndc_pendiente', $res_head);
+            } elseif ($f->estado == 2) {
+                $this->ci->load->view('ndc_venta/head_ndc_archivada', $res_head);
+            } elseif ($f->estado < 0) {
+                $this->ci->load->view('ndc_venta/head_ndc_anulada', $res_head);
+            }
+        }
         $this->ci->load->view('common/comprobantes/factura_venta', $data);
     }
 

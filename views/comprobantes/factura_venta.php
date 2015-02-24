@@ -1,14 +1,5 @@
         <?php
-        echo Open('div', array('id'=>'factventaprint_view','class'=>'container', 'style'=>'font-family:monospaced;font-size:11px'));        
-        echo Open('form', array('action' => base_url('common/facturaventapdf/create_pdf_fact'), 'method' => 'post'));
-            echo input(array('type' => 'hidden', 'name' => 'venta_id','value'=>$factura->codigofactventa));
-            echo tagcontent('button', '<span class="glyphicon glyphicon-file"></span> Ver PDF', array('id'=>'btnVerPdf','class'=>'btn btn-default'));
-        echo Close('form');
-        echo Open('form', array('action' => base_url('common/facturaventapdf/send_email'), 'method' => 'post'));
-            echo tagcontent('button', '<span class="glyphicon glyphicon-envelope"></span> Notificar por e-mail', array('id'=>'btnEnviarEmail','class'=>'btn btn-default'));
-            echo input(array('type'=>'email', 'name'=>'txt_email', 'value'=>$cliente_data[0]->email, 'class'=>'form-control'));
-        echo Close('form');
-        
+               
         $logo = Image(base_url('img/logo1.png'), array('alt'=>'master pc'));
         echo tagcontent('div', $logo, array('class'=>'col-md-6'));
         
