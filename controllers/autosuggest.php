@@ -71,14 +71,16 @@ class Autosuggest extends MX_Controller{
         
         
         function get_product_by_name( $param ) {
-            $parambuscaprod = explode('%20', $param);
-            
-            $or_like_data = array();
-            foreach ( $parambuscaprod as $val ) {
-                $and_like_data['nombreUnico'] = $val;
-            }
-
-            $res = $this->generic_model->get('billing_producto', null, $fields = 'codigo ci, nombreUnico value', null, 15, $or_like_data, $and_like_data );
+            $this->load->model('product_model');
+            $res = $this->product_model->autosugest_by_name($param);
+//            $parambuscaprod = explode('%20', $param);
+//            
+//            $or_like_data = array();
+//            foreach ( $parambuscaprod as $val ) {
+//                $and_like_data['nombreUnico'] = $val;
+//            }
+//
+//            $res = $this->generic_model->get('billing_producto', null, $fields = 'codigo ci, nombreUnico value', null, 15, $or_like_data, $and_like_data );
             if(!empty($res)) {
                     echo json_encode($res);
             } else {
