@@ -148,7 +148,7 @@ class Facturaventa_data {
     }
 
     //   Función para enviar pdf por correo electrónico 
-    public function send_email($email_destino) {
+    public function send_email($emails_destino, $fact_id) {
 //      Se carga la libreria email de CodeIgniter
         $this->ci->load->library("email");
 //      Se realiza la configuración que permite establecer desde donde se envia el mensaje
@@ -166,11 +166,13 @@ class Facturaventa_data {
         $this->ci->email->initialize($configGmail);
 //      Datos de envio de email
         $this->ci->email->from('testmasterpc@gmail.com', 'Mariuxi Cando');
-        $this->ci->email->to($email_destino);
+        $this->ci->email->to($emails_destino);
         $this->ci->email->subject('Factura Electronica');
-        $this->ci->email->message('Con este mensaje se adjunta un archivo en pdf que correponde a la factura generada por su compra en Master PC.');
+     
+        $url_fact='https://www.googledrive.com/host/0ByqQkg3INrbzfmlmNGQzMFYyT29TRi1HaXdZSVd4SVBocGxhblBiQjcwRDdraXJJejFSUFk/'.$fact_id.'.pdf';
+        $this->ci->email->message('Con este mensaje se adjunta un link para la descarga del archivo en pdf que correponde a la factura generada por su compra en Master PC. Clic en el siguiente enlace '.$url_fact);
         //Para adjuntar archivo
-        $this->ci->email->attach('C:/xampp/htdocs/billingsofv1/coresystem/facturamaster.pdf');
+//        $this->ci->email->attach('https://www.googledrive.com/host/0ByqQkg3INrbzfmlmNGQzMFYyT29TRi1HaXdZSVd4SVBocGxhblBiQjcwRDdraXJJejFSUFk/'.$fact_id);
         $this->ci->email->send();
     }
 
