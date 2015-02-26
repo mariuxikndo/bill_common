@@ -137,12 +137,14 @@ class Facturaventa_data {
         $mpdf->WriteHTML($this->ci->load->view('common/comprobantes/factura_venta', $data, true));
         $nombre_fact = $venta_id . '.pdf';
         $mpdf->Output($nombre_fact, 'F');
+      
         $dir_fac = 'C:/xampp/htdocs/billingsof_core/' . $nombre_fact;
         $this->save_drive($nombre_fact, $dir_fac);
+        return $mpdf;
     }
 // Crea, guarda en Drive y presenta la factura en formato pdf
     public function create_pdf_factVenta($venta_id) {
-        $this->create_save_pdf($venta_id);
+        $mpdf=$this->create_save_pdf($venta_id);
         $mpdf->Output();
     }
 //Enviar link de la factura por correo electrónico
