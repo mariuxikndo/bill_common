@@ -17,7 +17,7 @@ class Facturaventapdf extends MX_Controller {
     }
 
     function create_pdf_fact() {
-        $this->facturaventa_data->create_pdf_factVenta($this->input->post('venta_id'));
+        $this->facturaventa_data->create_pdf_factVenta($this->input->get('venta_id'));
     }
     
     function send_email() {

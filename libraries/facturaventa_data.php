@@ -122,9 +122,8 @@ class Facturaventa_data {
         }
         $this->ci->load->view('common/comprobantes/factura_venta', $data);
     }
-// Crear PDF de la factura
-    public function create_pdf_factVenta($venta_id) {
-
+// Crear y guarda en Drive la factura en formato pdf
+    public function create_save_pdf($venta_id) {
         $this->ci->load->library('mpdf60/mpdf');
 
         $f = $this->obtener_datos_factura($venta_id);
@@ -136,12 +135,15 @@ class Facturaventa_data {
 
         $mpdf = new mPDF();
         $mpdf->WriteHTML($this->ci->load->view('common/comprobantes/factura_venta', $data, true));
-        $mpdf->Output();
-        $nombre_fact = $venta_id.'.pdf';
+        $nombre_fact = $venta_id . '.pdf';
         $mpdf->Output($nombre_fact, 'F');
- 
         $dir_fac = 'C:/xampp/htdocs/billingsof_core/' . $nombre_fact;
         $this->save_drive($nombre_fact, $dir_fac);
+    }
+// Crea, guarda en Drive y presenta la factura en formato pdf
+    public function create_pdf_factVenta($venta_id) {
+        $this->create_save_pdf($venta_id);
+        $mpdf->Output();
     }
 //Enviar link de la factura por correo electrónico
     public function send_email($emails_destino, $fact_id) {
@@ -164,7 +166,7 @@ class Facturaventa_data {
         $this->ci->email->from('testmasterpc@gmail.com', 'Mariuxi Cando');
         $this->ci->email->to($emails_destino);
         $this->ci->email->subject('Factura Electronica');
-     
+        $this->create_save_pdf($fact_id);
         $url_fact='https://www.googledrive.com/host/0ByqQkg3INrbzfmlmNGQzMFYyT29TRi1HaXdZSVd4SVBocGxhblBiQjcwRDdraXJJejFSUFk/'.$fact_id.'.pdf';
         $this->ci->email->message('Con este mensaje se adjunta un link para la descarga del archivo en pdf que correponde a la factura generada por su compra en Master PC. De un clic en el siguiente enlace '.$url_fact);
         $res = $this->ci->email->send();
