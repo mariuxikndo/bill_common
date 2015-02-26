@@ -13,12 +13,12 @@ class Ajustesalida extends MX_Controller {
     }
 
     function index() {
-        $this->open_fact();
+        $this->open_ajuste();
     }
 
-    function open_fact() {
+    function open_ajuste() {
         $this->ajustesalida_data->open_ajuste($this->input->post('ajuste_id'));
-//        $this->ajustesalida_data->open_ajuste(3);
+//        $this->ajustesalida_data->open_ajuste(41);
     }
 
 }

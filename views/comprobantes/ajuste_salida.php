@@ -2,14 +2,17 @@
                
         $logo = Image(base_url('img/logo1.png'), array('alt'=>'master pc'));
         echo tagcontent('div', $logo, array('class'=>'col-md-6'));
-                
+        echo tagcontent('div', '<strong>AJUSTE DE SALIDA No. </strong>'.$ajuste->id, array('class'=>'col-md-6'));        
         ?>
+         <div class="col-md-6 pull-right">
+            FECHA REG.:  <?php echo $ajuste->fecha; ?>
+        </div>
         <div  class="col-md-6">
-            MASTERPC CIA LTDA <br>
-            Dirección Matriz: Azuay y Olmedo. <br>
-            Dir Sucursal: <br>
-            Contribuyente especial Nro: 00290 <br>
-            OBLIGADO A LLEVAR CONTABILIDAD: SI <br>
+            R.U.C.: <?php echo $ajuste->PersonaComercio_cedulaRuc; ?> <br>
+            <?php echo $ajuste->nombres.' '.$ajuste->apellidos; ?> <br>
+            <?php echo $ajuste->direccion; ?> <br>
+            <?php echo $ajuste->telefonos; ?> <br>
+            <?php echo $ajuste->email; ?> <br>
         </div>
         
     <?php
@@ -19,19 +22,20 @@
                 'Cant.',
                 'Descrip.',
                 'P. Unit.',
+                'P. Total'
             );
             echo tablethead($thead);
-
-                if (sizeof($ajuste_det) > 0){
-                    foreach ($ajuste_det as $d) {
-                        echo Open('tr');
-                            echo tagcontent('td', $d->Producto_codigo);
-                            echo tagcontent('td', $d->itemcantidad);
-                            echo tagcontent('td', $this->generic_model->get_val_where('billing_producto', array('billing_producto.codigo' => $d->Producto_codigo), 'nombreUnico', null, -1) );                                
-                            echo tagcontent('td', number_decimal($d->itemcosto));
+            if (sizeof($ajuste_det)>0){
+                foreach ($ajuste_det as $a) {
+                    echo Open('tr');
+                            echo tagcontent('td', $a->Producto_codigo);
+                            echo tagcontent('td', $a->itemcantidad);
+                            echo tagcontent('td', $a->nombreUnico);                                
+                            echo tagcontent('td', number_decimal($a->itemcosto));
+                            echo tagcontent('td', number_decimal($a->itemcostoxcantidad));
                         echo Close('tr');
-                    }
                 }
+        }
             echo Close('table');
             echo lineBreak2(1, array('class'=>'clr'));
             echo Open('div',array('class'=>'col-md-9 pull-left'));            
@@ -40,8 +44,8 @@
                 <b>OBSERVACIONES:</b><br>
                 <p> <?php echo $ajuste->observaciones; ?></p>
 
-                <?php 
-                   echo tagcontent('div', 'Bodega: '.$this->generic_model->get_val_where('billing_bodega', array('id' => $ajuste->bodega_id), 'nombre', null, -1) , array('class'=>'col-md-12'));
+        <?php 
+            echo tagcontent('div', 'Bodega: '.$ajuste->nombre);
                
             echo Close('div');
             
