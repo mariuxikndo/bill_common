@@ -167,7 +167,8 @@ class Facturaventa_data {
      
         $url_fact='https://www.googledrive.com/host/0ByqQkg3INrbzfmlmNGQzMFYyT29TRi1HaXdZSVd4SVBocGxhblBiQjcwRDdraXJJejFSUFk/'.$fact_id.'.pdf';
         $this->ci->email->message('Con este mensaje se adjunta un link para la descarga del archivo en pdf que correponde a la factura generada por su compra en Master PC. De un clic en el siguiente enlace '.$url_fact);
-        $this->ci->email->send();
+        $res = $this->ci->email->send();
+        return $res;
     }
 
     public function save_drive($nombre_fact, $dir_fact) {

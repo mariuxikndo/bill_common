@@ -21,7 +21,13 @@ class Facturaventapdf extends MX_Controller {
     }
     
     function send_email() {
-        $this->facturaventa_data->send_email($this->input->post('txt_email'),$this->input->post('fact_id') );
+        $res = $this->facturaventa_data->send_email($this->input->post('txt_email'),$this->input->post('fact_id') );
+        
+        if($res){
+            echo info_msg(' E-mail enviado correctamente');
+        }else{
+            echo warning_msg(' No fue posible enviar la notificacion por e-mail');
+        }
     }
 
 }
