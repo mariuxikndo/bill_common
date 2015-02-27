@@ -135,6 +135,7 @@ class Facturaventa_data {
 
         $mpdf = new mPDF();
         $mpdf->WriteHTML($this->ci->load->view('common/comprobantes/factura_venta', $data, true));
+        
         $nombre_fact = $venta_id . '.pdf';
         $mpdf->Output($nombre_fact, 'F');
       
@@ -180,7 +181,7 @@ class Facturaventa_data {
 //      Datos obtenidos en la Consola de Desarrolladores de Google
         $cliente_id = '792070845245-53cs74geuk3r9l467b57mbcu216c6i9c.apps.googleusercontent.com';
         $email_servicio = '792070845245-53cs74geuk3r9l467b57mbcu216c6i9c@developer.gserviceaccount.com';
-        $direccion_key = 'C:\xampp\htdocs\billingsof_core\application\modules\common\key_google\Shopping Cart-466439de0a0f.p12';
+        $direccion_key = '../key_google/Shopping Cart-466439de0a0f.p12';
 //      Creación de un objeto tipo Client
         $client = new Google_Client();
         $client->setClientId($cliente_id);
@@ -217,7 +218,7 @@ class Facturaventa_data {
                 'data' => $data,
                 'uploadType' => 'media'
             ));
-            print $archivo_creado->getId();
+//            print $archivo_creado->getId();
         } catch (Exception $e) {
             print "Se ha generado el siguiente error: " . $e->getMessage();
         }
