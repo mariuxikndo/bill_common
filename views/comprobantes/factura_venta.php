@@ -15,7 +15,7 @@
         ?>
         
         <div class="col-md-6 pull-right">
-            R.U.C.:  1191732525001 <br>
+            R.U.C.: <?php echo $empresa->ruc; ?>   <br>
             FECHA REG.: 
             <?php echo $factura->fechaCreacion; ?>
         </div>
