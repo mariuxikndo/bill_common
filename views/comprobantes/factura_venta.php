@@ -1,6 +1,5 @@
-        <?php
+      <?php
                
-        echo Open('div', array('id'=>'factventaprint_view','class'=>'container', 'style'=>'font-family:monospaced;font-size:11px'));                
         $logo = Image(base_url('img/logo1.png'), array('alt'=>'master pc'));
         echo tagcontent('div', $logo, array('class'=>'col-md-6'));
         
@@ -16,16 +15,16 @@
         ?>
         
         <div class="col-md-6 pull-right">
-            R.U.C.: 1191732525001 <br>
+            R.U.C.:  1191732525001 <br>
             FECHA REG.: 
             <?php echo $factura->fechaCreacion; ?>
         </div>
         <div  class="col-md-6">
-            MASTERPC CIA LTDA <br>
-            Dirección Matriz: Azuay y Olmedo. <br>
+            <?php echo $empresa->nombreComercial; ?> <br>
+            Dirección Matriz:  <?php echo $empresa->direccion; ?>  <br>
             Dir Sucursal: <br>
-            Contribuyente especial Nro: 00290 <br>
-            OBLIGADO A LLEVAR CONTABILIDAD: SI <br>
+            Contribuyente <?php echo $empresa->clase; ?> Nro: <?php echo $empresa->resolucion; ?> <br>
+            OBLIGADO A LLEVAR CONTABILIDAD:  <?php echo $empresa->contabilidad; ?><br>
         </div>
         <br>
         <table class="table table-striped table-condensed" style="font-size:11px">
@@ -130,7 +129,5 @@
                 o descarguelo de nuestro sitio web www.masterpc.com.ec. También puede solicitar su documento 
                 en el servicio de rentas internas SRI.
         </div>                
-        <?php
-            echo Close('div');
-
+  
 
