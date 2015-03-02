@@ -107,7 +107,9 @@ class Facturaventa_data {
     }
     /* Presentar la factura en html */
 
-    public function open_fact($venta_id, $formato = 'f2') {
+    public function open_fact($venta_id) {        
+        $formato = get_settings('FORMATO_FACT');
+        
         $f = $this->obtener_datos_factura($venta_id);
         $cliente = $this->obtener_datos_cliente($f->cliente_cedulaRuc);
         $data['empresa']=$this->get_data_empresa();

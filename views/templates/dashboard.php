@@ -58,7 +58,7 @@ $js = array(
 echo jsload($js);
 
 $res['module_title'] = 'Ventas';
-$this->load->view('templates/navigation.php',$res);    
+$this->load->view('common/templates/navigation.php',$res);    
 
 $page_class = '';
 if(!empty($slidebar)){

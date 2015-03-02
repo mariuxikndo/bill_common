@@ -1,7 +1,7 @@
       <?php
-               
-        $logo = Image(base_url('img/logo1.png'), array('alt'=>'master pc'));
-        echo tagcontent('div', $logo, array('class'=>'col-md-6'));
+        if(get_settings('PRINT_HEAD_FACT') ){
+            $logo = Image(base_url('img/logo1.png'), array('alt'=>'master pc'));
+            echo tagcontent('div', $logo, array('class'=>'col-md-6'));
         
             if($factura->estado == 1){
                 echo tagcontent('div', '<strong>FACT. PENDIENT No.</strong>'.$factura->codigofactventa, array('class'=>'col-md-6'));
@@ -13,29 +13,32 @@
                 }
             }
         ?>
+            <div class="col-md-6 pull-right">
+                R.U.C.: <?php echo $empresa->ruc; ?>   <br>
+                FECHA REG.: 
+                <?php echo $factura->fechaCreacion; ?>
+            </div>
+            <div  class="col-md-6">
+                <?php echo $empresa->nombreComercial; ?> <br>
+                Dirección Matriz:  <?php echo $empresa->direccion; ?>  <br>
+                Dir Sucursal: <br>
+                Contribuyente <?php echo $empresa->clase; ?> Nro: <?php echo $empresa->resolucion; ?> <br>
+                OBLIGADO A LLEVAR CONTABILIDAD:  <?php echo $empresa->contabilidad; ?><br>
+            </div>
+        <?php
+        }else{
+            echo LineBreak(10, array('class'=>'clr'));
+        }
+        ?>
         
-        <div class="col-md-6 pull-right">
-            R.U.C.: <?php echo $empresa->ruc; ?>   <br>
-            FECHA REG.: 
-            <?php echo $factura->fechaCreacion; ?>
-        </div>
-        <div  class="col-md-6">
-            <?php echo $empresa->nombreComercial; ?> <br>
-            Dirección Matriz:  <?php echo $empresa->direccion; ?>  <br>
-            Dir Sucursal: <br>
-            Contribuyente <?php echo $empresa->clase; ?> Nro: <?php echo $empresa->resolucion; ?> <br>
-            OBLIGADO A LLEVAR CONTABILIDAD:  <?php echo $empresa->contabilidad; ?><br>
-        </div>
-        <br>
-        <table class="table table-striped table-condensed" style="font-size:11px">
+        <table class="table table-striped table-condensed" style="font-size:<?= get_settings('FONT_SIZE_FACT') ?>">
             <tr>
                 <td>CLIENTE: <?php echo $cliente_data[0]->nombres.' '.$cliente_data[0]->apellidos; ?></td>
                 <td>CI/RUC: <?php echo $cliente_data[0]->PersonaComercio_cedulaRuc; ?></td>
             </tr>
         </table>
-        <br>
     <?php
-        echo Open('table',array('class'=>'table table-striped table-condensed', 'style'=>'font-family:monospaced;font-size:11px'));    
+        echo Open('table',array('class'=>'table table-striped table-condensed', 'style'=>'font-family:monospaced;font-size:'.get_settings('FONT_SIZE_FACT')));
             $thead = array(
                 'Cod.',
                 'Cant.',
@@ -66,7 +69,7 @@
                 }
             echo Close('table');
             echo lineBreak2(1, array('class'=>'clr'));
-            echo Open('div',array('class'=>'col-md-9 pull-left'));            
+            echo Open('div',array('class'=>'col-md-8 pull-left'));            
         ?>
                 Dirección: <?php echo $cliente_data[0]->direccion; ?><br>
                 Teléfono: <?php echo $cliente_data[0]->telefonos; ?><br>
@@ -85,8 +88,8 @@
                     echo tagcontent('div', 'Usuario: '.$datos_observ['user'], array('class'=>'col-md-12'));
             echo Close('div');
             
-            echo Open('div',array('class'=>'col-md-3 pull-right'));
-                echo Open('table',array('class'=>'table table-condensed','style'=>'font-size:11px'));
+            echo Open('div',array('class'=>'col-md-4 pull-right'));
+                echo Open('table',array('class'=>'table table-condensed','style'=>'font-size:'.get_settings('FONT_SIZE_FACT')));
                     echo tagcontent('tr', tagcontent('td', '<span class="pull-right">SUBTOTAL 12%</span>').  tagcontent('td', '<span class="pull-right">'.  number_decimal($factura->tarifadocebruto).'</span>' ));
                     echo tagcontent('tr', tagcontent('td', '<span class="pull-right">SUBTOTAL 0%:</span>').  tagcontent('td', '<span class="pull-right">'.  number_decimal($factura->tarifacerobruto).'</span>' ));
 
@@ -101,10 +104,10 @@
                 echo Close('table');
             echo Close('div');
             
-            echo LineBreak(3, array('class'=>'clr'));           
+            echo LineBreak(1, array('class'=>'clr'));           
         ?>                 
-        <div class="col-md-12">
-            <table class="table text-center">
+        <div class="col-md-12" >
+            <table class="table text-center" style="font-size: <?= get_settings('FONT_SIZE_FACT') ?>">
                 <tr>
                     <td>
                         <div>
@@ -123,11 +126,16 @@
                 </tr>
             </table>
         </div>
-       <div class="col-md-12">
-            NOTA: Este documento no es válido para crédito tributario, no es una factura,
-                master pc emite factura electrónica, revise su factura autorizada en su correo electrónico,
-                o descarguelo de nuestro sitio web www.masterpc.com.ec. También puede solicitar su documento 
-                en el servicio de rentas internas SRI.
-        </div>                
-  
-
+                
+        <?php
+            if(get_settings('PRINT_HEAD_FACT')) {
+        ?>
+            <div class="col-md-12" style="font-size: <?= get_settings('FONT_SIZE_FACT') ?>">
+                 NOTA: Este documento no es válido para crédito tributario, no es una factura,
+                     master pc emite factura electrónica, revise su factura autorizada en su correo electrónico,
+                     o descarguelo de nuestro sitio web www.masterpc.com.ec. También puede solicitar su documento 
+                     en el servicio de rentas internas SRI.
+             </div>                
+        <?php
+            }
+        ?>

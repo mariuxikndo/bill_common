@@ -4,26 +4,27 @@
 
         echo Open('div',array('id'=>'factventaprint_view', 'class'=>'container', 'style'=>'font-family:monospaced; font-size:11px'));            
         $logo = Image(base_url('img/logo1.png'), array('alt'=>'master pc'));
-        echo tagcontent('div', $logo, array('class'=>'col-md-6'));        
-    ?>
-        <div class="col-md-6 pull-right">
-            R.U.C.: 1191732525001 <br>
-            <b>COTIZACIÓN Nro: </b>
-            <?php echo $cotizacion[0]->id; ?><br>
-            FECHA: 
-            <?php echo $cotizacion[0]->fechaCreacion; ?>
-        </div>
-        <div  class="col-md-6">
-            MASTERPC CIA LTDA <br>
-            Dirección Matriz: Azuay y Olmedo. <br>
-            Dir Sucursal: <br>
-            Contribuyente especial Nro: 00290 <br>
-            OBLIGADO A LLEVAR CONTABILIDAD: SI <br>
-        </div>
+        echo tagcontent('div', $logo, array('class'=>'col-md-6'));   
+        
+        ?>
+            <div class="col-md-6 pull-right">
+                R.U.C.: 1191732525001 <br>
+                <b>COTIZACIÓN Nro: </b>
+                <?php echo $cotizacion[0]->id; ?><br>
+                FECHA: 
+                <?php echo $cotizacion[0]->fechaCreacion; ?>
+            </div>
+            <div  class="col-md-6">
+                MASTERPC CIA LTDA <br>
+                Dirección Matriz: Azuay y Olmedo. <br>
+                Dir Sucursal: <br>
+                Contribuyente especial Nro: 00290 <br>
+                OBLIGADO A LLEVAR CONTABILIDAD: SI <br>
+            </div>
         <br>
         <table class="table table-striped table-condensed" style="font-size:11px">
             <tr>
-                <td>CLIENTE: <?php echo $cliente_data[0]->nombres; ?></td>
+                <td>CLIENTE: <?php echo $cliente_data[0]->nombres.' '.$cliente_data[0]->apellidos; ?></td>
                 <td>CI/RUC: <?php echo $cliente_data[0]->PersonaComercio_cedulaRuc; ?></td>
             </tr>
         </table>

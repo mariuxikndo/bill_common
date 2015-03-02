@@ -94,7 +94,7 @@ echo input(array('type'=>'hidden', 'name'=>'numdecimales', 'id'=>'numdecimales',
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> <?=  $this->user->username ?></a>
                         </li>
-                        <li><a href="#"><i class="fa fa-gear fa-fw"></i> Configuraci&oacute;n</a>
+                        <li><a href="<?= base_url('login/editprofile') ?>"><i class="fa fa-gear fa-fw"></i> Configuraci&oacute;n</a>
                         </li>
                         <li class="divider"></li>
                         <li><a href="<?=  base_url('login/welcome/logout') ?>"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
