@@ -1,5 +1,6 @@
       <?php
-        if(get_settings('PRINT_HEAD_FACT') ){
+      /* este caso sin encabezado,  se da solo cuando no es electronica, ya que se necesita imprimir el encabezado impreso */ 
+        if(get_settings('PRINT_HEAD_FACT') ){ 
             $logo = Image(base_url('img/logo1.png'), array('alt'=>'master pc'));
             echo tagcontent('div', $logo, array('class'=>'col-md-6'));
         
@@ -15,8 +16,13 @@
         ?>
             <div class="col-md-6 pull-right">
                 R.U.C.: <?php echo $empresa->ruc; ?>   <br>
-                FECHA REG.: 
-                <?php echo $factura->fechaCreacion; ?>
+                <?php 
+                if($punto_venta->electronic == 1){
+                    echo tagcontent('span', 'Fecha Reg.: '.$factura->fechaCreacion, array('class'=>''));
+                }else{
+                    echo tagcontent('span', 'Fecha Reg.: '.$factura->fechaarchivada, array('class'=>''));
+                }
+                ?>
             </div>
             <div  class="col-md-6">
                 <?php echo $empresa->nombreComercial; ?> <br>
@@ -27,10 +33,16 @@
             </div>
         <?php
         }else{
-            echo LineBreak(10, array('class'=>'clr'));
+            echo LineBreak(8, array('class'=>'clr'));
+            if($factura->autorizado_sri == 2){ /* 2 cuando es de un punto no electronico*/
+                echo tagcontent('span', 'FACTURA No: '.$factura->establecimiento.$factura->puntoemision.'-'.str_pad($factura->secuenciafactventa, 9, '0', STR_PAD_LEFT), array('class'=>'')).'&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;';                
+                echo tagcontent('span', 'FECHA: '.$factura->fechaarchivada, array('class'=>''));
+            }else{
+                echo tagcontent('span', 'PRE-FACTURA No: '.$factura->establecimiento.$factura->puntoemision.'-'.str_pad($factura->secuenciafactventa, 9, '0', STR_PAD_LEFT), array('class'=>'')).'&nbsp;&nbsp;&nbsp;/&nbsp;&nbsp;&nbsp;';                
+                echo tagcontent('span', 'FECHA: '.$factura->fechaCreacion, array('class'=>''));                
+            }
         }
         ?>
-        
         <table class="table table-striped table-condensed" style="font-size:<?= get_settings('FONT_SIZE_FACT') ?>">
             <tr>
                 <td>CLIENTE: <?php echo $cliente_data[0]->nombres.' '.$cliente_data[0]->apellidos; ?></td>
@@ -69,7 +81,7 @@
                 }
             echo Close('table');
             echo lineBreak2(1, array('class'=>'clr'));
-            echo Open('div',array('class'=>'col-md-8 pull-left'));            
+            echo Open('div',array('class'=>'col-md-8 pull-left', 'style'=>'font-size:'.get_settings('FONT_SIZE_FACT')));
         ?>
                 Dirección: <?php echo $cliente_data[0]->direccion; ?><br>
                 Teléfono: <?php echo $cliente_data[0]->telefonos; ?><br>

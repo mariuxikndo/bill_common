@@ -8,15 +8,20 @@
 class Facturaventa_data {
 
     private $ci;
+    private $obj_puntoventa;
 
     function __construct() {
         $this->ci = & get_instance();
+        $this->ci->load->library('common/puntoventa');
+        
+        $this->obj_puntoventa = new Puntoventa();
     }
 
     public function obtener_datos_factura($codFact) {
         $fields = array(
             'codigofactventa',
             'fechaCreacion',
+            'fechaarchivada',
             'subtotalBruto',
             'subtotalNeto',
             'descuentovalor',
@@ -138,6 +143,8 @@ class Facturaventa_data {
                 $this->ci->load->view('ndc_venta/head_ndc_anulada', $res_head);
             }
         }
+        
+        $data['punto_venta'] = $this->obj_puntoventa->get_punto_venta($this->ci->user->id, '01');
         $this->ci->load->view('common/comprobantes/factura_venta_'.$formato, $data);
     }
 
