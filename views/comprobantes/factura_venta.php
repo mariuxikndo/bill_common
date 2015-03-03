@@ -140,13 +140,12 @@
         </div>
                 
         <?php
-            if(get_settings('PRINT_HEAD_FACT')) {
+            if(get_settings('PRINT_FOOTER_FACT')) {
         ?>
             <div class="col-md-12" style="font-size: <?= get_settings('FONT_SIZE_FACT') ?>">
-                 NOTA: Este documento no es válido para crédito tributario, no es una factura,
-                     master pc emite factura electrónica, revise su factura autorizada en su correo electrónico,
-                     o descarguelo de nuestro sitio web www.masterpc.com.ec. También puede solicitar su documento 
-                     en el servicio de rentas internas SRI.
+                <?php
+                    echo get_info('INVOICE_FOOTER');
+                ?>
              </div>                
         <?php
             }
