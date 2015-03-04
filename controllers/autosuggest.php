@@ -96,5 +96,11 @@ class Autosuggest extends MX_Controller{
                     echo '{"id":"--","name":"No hay resultados para '.$param.'"}';
             }
         }
+        
+        /* Eliminamos el cliente cargado por autosuggest*/
+        public function quit_client() {
+            echo tagcontent('script', '$("#client_name").html("Cliente: Todos")');
+            echo tagcontent('script', '$("#client_id").val("")');
+        }        
     
 }

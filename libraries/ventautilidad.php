@@ -98,22 +98,51 @@ class Ventautilidad {
                     );
             
             return $total_utilidad;
-        }    
+        }
+        
+        public function get_pvp_total($venta_id, $tipotransaccion_cod = -1) {
+            $where_data = array('venta_id'=>$venta_id);
+            if($tipotransaccion_cod != -1){
+                $where_data['tipotransaccion_cod'] = $tipotransaccion_cod;
+            }
+            
+            $total_pvp = $this->ci->generic_model->sum_table_field( 
+                        'bill_venta_utilidad', 
+                        'pvp',
+                        $where_data
+                    );
+            
+            return $total_pvp;
+        }
     
         /*
          * Se presenta la utilidad en porcentaje, respecto al pvp y costo
          */
+//        public function get_utilidad_porcent($venta_id, $tipotransaccion_cod = -1) {
+//            $total_utilidad = $this->get_utilidad_total($venta_id,$tipotransaccion_cod);            
+//            $costo_total = $this->get_costo_total($venta_id,$tipotransaccion_cod);
+//            
+//            if($costo_total > 0){
+//                $utilidad_porcent = ($total_utilidad * 100)/$costo_total;                
+//                return $utilidad_porcent;                            
+//            }else{ /* Si no tiene costo, la utilidad es del 100%*/
+//                return 100;
+//            }
+//        }
+        
+        /*
+         * Obtenemos la utilidad en porcentaje con respecto al  pvp
+         */
         public function get_utilidad_porcent($venta_id, $tipotransaccion_cod = -1) {
             $total_utilidad = $this->get_utilidad_total($venta_id,$tipotransaccion_cod);            
-            $costo_total = $this->get_costo_total($venta_id,$tipotransaccion_cod);
+            $pvp_total = $this->get_pvp_total($venta_id,$tipotransaccion_cod);
             
-            if($costo_total > 0){
-                $utilidad_porcent = ($total_utilidad * 100)/$costo_total;                
-                return $utilidad_porcent;                            
+            if($pvp_total > 0){
+                $utilidad_porcent = ($total_utilidad * 100)/$pvp_total;
+                return $utilidad_porcent;
             }else{ /* Si no tiene costo, la utilidad es del 100%*/
                 return 100;
             }
-
-        }    
+        }
 
 }
