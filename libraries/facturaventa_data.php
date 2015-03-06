@@ -126,26 +126,21 @@ class Facturaventa_data {
         $res_head['fact_data'] = $f;
         $res_head['cli'] = $cliente;
 
-        echo 'hola 0 ';
         if ($f->puntoventaempleado_tiposcomprobante_cod == '01') {
-            echo 'hola 1 ';
             if ($f->estado == 1) {
-                echo 'hola 2 ';
-                $this->ci->load->view('ventas/head_fact_pendiente', $res_head);
+                echo $this->ci->load->view('ventas/head_fact_pendiente', $res_head, TRUE);
             } elseif ($f->estado == 2) {
-                echo 'hola 3 ';
-                $this->ci->load->view('ventas/head_fact_archivada', $res_head);
+                echo $this->ci->load->view('ventas/head_fact_archivada', $res_head, TRUE);
             } elseif ($f->estado < 0) {
-                echo 'hola 4 ';
-                $this->ci->load->view('ventas/head_fact_anulada', $res_head);
+                echo $this->ci->load->view('ventas/head_fact_anulada', $res_head, TRUE);
             }
         } elseif ($f->puntoventaempleado_tiposcomprobante_cod == '04') {
             if ($f->estado == 1) {
-                $this->ci->load->view('ndc_venta/head_ndc_pendiente', $res_head);
+                echo $this->ci->load->view('ndc_venta/head_ndc_pendiente', $res_head, TRUE);
             } elseif ($f->estado == 2) {
-                $this->ci->load->view('ndc_venta/head_ndc_archivada', $res_head);
+                echo $this->ci->load->view('ndc_venta/head_ndc_archivada', $res_head, TRUE);
             } elseif ($f->estado < 0) {
-                $this->ci->load->view('ndc_venta/head_ndc_anulada', $res_head);
+                echo $this->ci->load->view('ndc_venta/head_ndc_anulada', $res_head, TRUE);
             }
         }
         
