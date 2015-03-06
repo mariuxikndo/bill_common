@@ -142,7 +142,7 @@ class Cuentasxcobrar {
         }        
         return $message;
    }
-    
+       
    /* obtener el balance de una cxc */
    public function get_balance($cxc_id) {
        $cxc_data = $this->ci->generic_model->get_data( 
