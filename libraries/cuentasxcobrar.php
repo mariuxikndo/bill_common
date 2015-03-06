@@ -139,9 +139,20 @@ class Cuentasxcobrar {
             }
         }else{
             $message .= info_msg(' Este documento no ha generado cuentas x cobrar.'); 
-        }
-        
+        }        
         return $message;
    }
     
+   /* obtener el balance de una cxc */
+   public function get_balance($cxc_id) {
+       $cxc_data = $this->ci->generic_model->get_data( 
+                'bill_cxc', 
+                array( 'id'=>$cxc_id ),
+                'balance', 
+               null,
+                1
+               );       
+       return $cxc_data->balance;
+   }
+   
 }
