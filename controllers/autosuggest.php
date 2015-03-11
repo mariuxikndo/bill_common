@@ -18,9 +18,9 @@ class Autosuggest extends MX_Controller{
 		parent::__construct();
 	}
     
-        function autosugest_plan_cuentas( $param ) {
-            $or_like_data = array('nombre'=>$param,'cod'=>$param);
-            $res = $this->generic_model->get('billing_contacuentasplan', null, $fields = 'cod ci, nombre value', null, 0, $or_like_data );
+        function get_plan_cuentas_by_name( $param ) {            
+            $this->load->model('plancuentas_model');
+            $res = $this->plancuentas_model->get_plan_cuentas_by_name($param);
             if(!empty($res)) {
                     echo json_encode($res);
             } else {
