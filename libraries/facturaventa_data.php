@@ -8,13 +8,16 @@
 class Facturaventa_data {
 
     private $ci;
+    private $obj_encript;
     private $obj_puntoventa;
 
     function __construct() {
         $this->ci = & get_instance();
         $this->ci->load->library('common/puntoventa');
+        $this->ci->load->library('encript');
         
         $this->obj_puntoventa = new Puntoventa();
+        $this->obj_encript = new Encript();
     }
 
     public function obtener_datos_factura($codFact) {
@@ -45,8 +48,20 @@ class Facturaventa_data {
             'tarifadocebruto',
             'recargovalor',
             'cliente_cedulaRuc',
+            'venta_id', /* En el caso de ser nota de credito este campo es el id de la factura a la que se le aplico */
         );
         $fact = $this->ci->generic_model->get('billing_facturaventa', array('codigofactventa' => $codFact), $fields, null, 1);
+        
+        /*seleccionamos el nro de factura en caso de ser nota de credito */
+        if($fact->puntoventaempleado_tiposcomprobante_cod == '04'){
+            $fields = array(
+                'puntoventaempleado_establecimiento establecimiento',
+                'puntoventaempleado_puntoemision puntoemision',
+                'secuenciafactventa',
+            );
+            $ndc = $this->ci->generic_model->get('billing_facturaventa', array('codigofactventa' => $fact->venta_id), $fields, null, 1);            
+            $fact->fact_ndc = $fact->establecimiento.$fact->puntoemision.'-'.$fact->secuenciafactventa;
+        }
         return $fact;
     }
 
@@ -97,17 +112,19 @@ class Facturaventa_data {
 //Obtener datos de la empresa 
     public function  get_data_empresa(){
         $join_cluase=array(
-            '0'=>array('table'=>'bill_contribuyente', 'condition'=>'bill_contribuyente.id=billing_empresa.contribuyente_id')
+            '0'=>array('table'=>'bill_contribuyente', 'condition'=>'bill_contribuyente.id = em.contribuyente_id')
           );
         $fields=array(
-            'billing_empresa.ruc',
-            'billing_empresa.nombreComercial',
-            'billing_empresa.direccion',
+            'em.ruc',
+            'em.nombreComercial',
+            'em.direccion',
             'bill_contribuyente.clase',
             'bill_contribuyente.resolucion',
             'bill_contribuyente.contabilidad'
         );
-        $data_empre = $this->ci->generic_model->get_join('billing_empresa', null,$join_cluase,$fields, 1, null, null);
+        $data_empre = $this->ci->generic_model->get_join('billing_empresa em', null,$join_cluase,$fields, 1, null, null);
+        $data_empre->ruc = $this->obj_encript->decryptbase64($data_empre->ruc, get_settings('PASSWORDSALTMAIN'));
+        
         return $data_empre;
     }
     /* Presentar la factura en html */

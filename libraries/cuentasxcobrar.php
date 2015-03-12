@@ -48,9 +48,13 @@ class Cuentasxcobrar {
                     'saldo_client' => $new_saldo_client,
                 );
                 $cxc_id = $this->ci->generic_model->save($cxc,'bill_cxc');
-                $this->update_cxc_saldos($client_id, $new_saldo_client);                
+                $upd_saldos = $this->update_cxc_saldos($client_id, $new_saldo_client);                
                 
-                return $cxc_id;
+                if( $cxc_id > 0 AND $upd_saldos > 0 ){
+                    return $cxc_id;                    
+                }else{
+                    return false;
+                }
     }
     
     public function update_cxc_saldos($client_id, $new_saldo) {

@@ -54,7 +54,7 @@ class Comprobanteingreso {
         $res['cliente'] = $this->ci->generic_model->get_by_id('billing_cliente',$res['recibo']->client_id,'','PersonaComercio_cedulaRuc');
         $res['data_asiento'] = $this->obj_asientocontable->get_ac_data($tipotransaccion_cod, $doc_id);
         
-        $this->ci->load->view('comprobantes/comprobante_ingreso',$res);
+        $this->ci->load->view('common/comprobantes/comprobante_ingreso',$res);
     }
     
 }

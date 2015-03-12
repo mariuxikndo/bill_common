@@ -43,6 +43,7 @@ class Cuentasxpagar {
                     'proveedor_id' => $proveedor_id, 
                     'saldo_proveedor' => $new_saldo_proveedor, 
                     'tipotransaccion_cod' => $tipotransaccion_cod, 
+                    'user_id' => $this->ci->user->id, 
                 );
                 $cxc_id = $this->ci->generic_model->save($cxp,'bill_cxp');
                 $this->update_cxp_saldos($proveedor_id, $new_saldo_proveedor);                

@@ -4,15 +4,21 @@
             $logo = Image(base_url('img/logo1.png'), array('alt'=>'master pc'));
             echo tagcontent('div', $logo, array('class'=>'col-md-6'));
         
+            $doc_label = 'FACT.';
+            if($factura->puntoventaempleado_tiposcomprobante_cod == '04'){
+                $doc_label = 'N.D.C.';
+                echo tagcontent('div', '<strong>APLICADA A FACT. No.</strong>'.$factura->fact_ndc, array('class'=>'col-md-6'));                
+            }
+            
             if($factura->estado == 1){
-                echo tagcontent('div', '<strong>FACT. PENDIENT No.</strong>'.$factura->codigofactventa, array('class'=>'col-md-6'));
+                echo tagcontent('div', '<strong>'.$doc_label.' PENDIENT No.</strong>'.$factura->codigofactventa, array('class'=>'col-md-6'));
             }elseif($factura->estado == 2){
                 if($factura->autorizado_sri == 2){
-                    echo tagcontent('div', '<strong>FACTURA No.</strong>'.$factura->establecimiento.$factura->puntoemision.'-'.str_pad($factura->secuenciafactventa, 9, '0', STR_PAD_LEFT), array('class'=>'col-md-6'));                    
+                    echo tagcontent('div', '<strong>'.$doc_label.' No.</strong>'.$factura->establecimiento.$factura->puntoemision.'-'.str_pad($factura->secuenciafactventa, 9, '0', STR_PAD_LEFT), array('class'=>'col-md-6'));
                 }else{
-                    echo tagcontent('div', '<strong>PRE-FACTURA No.</strong>'.$factura->codigofactventa, array('class'=>'col-md-6'));
+                    echo tagcontent('div', '<strong>PRE-'.$doc_label.' No.</strong>'.$factura->codigofactventa, array('class'=>'col-md-6'));
                 }
-            }
+            }            
         ?>
             <div class="col-md-6 pull-right">
                 R.U.C.: <?php echo $empresa->ruc; ?>   <br>
