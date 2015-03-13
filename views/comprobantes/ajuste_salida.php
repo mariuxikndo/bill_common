@@ -1,20 +1,16 @@
 <?php
-               
+         
+echo tagcontent('button', '<span class="glyphicon glyphicon-print"></span> Imprimir', array('id'=>'printbtn','data-target'=>'ajuste_salida_print_view','class'=>'btn btn-default'));
+echo lineBreak2(1, array('class'=>'clr'));
+
+echo Open('div', array('id'=>'ajuste_salida_print_view','class'=>'col-md-12'));
         $logo = Image(base_url('img/logo1.png'), array('alt'=>'master pc'));
         echo tagcontent('div', $logo, array('class'=>'col-md-6'));
         echo tagcontent('div', '<strong>AJUSTE DE SALIDA No. </strong>'.$ajuste->id, array('class'=>'col-md-6'));        
         ?>
-         <div class="col-md-6 pull-right">
+        <div class="col-md-6 pull-right">
             FECHA REG.:  <?php echo $ajuste->fecha; ?>
         </div>
-        <div  class="col-md-6">
-            R.U.C.: <?php echo $ajuste->PersonaComercio_cedulaRuc; ?> <br>
-            <?php echo $ajuste->nombres.' '.$ajuste->apellidos; ?> <br>
-            <?php echo $ajuste->direccion; ?> <br>
-            <?php echo $ajuste->telefonos; ?> <br>
-            <?php echo $ajuste->email; ?> <br>
-        </div>
-        
     <?php
         echo Open('table',array('class'=>'table table-striped table-condensed', 'style'=>'font-family:monospaced;font-size:11px'));    
             $thead = array(
@@ -35,8 +31,8 @@
                             echo tagcontent('td', number_decimal($a->itemcostoxcantidad));
                         echo Close('tr');
                 }
-        }
-            echo Close('table');
+            }
+        echo Close('table');
             echo lineBreak2(1, array('class'=>'clr'));
             echo Open('div',array('class'=>'col-md-9 pull-left'));            
         ?>
@@ -56,7 +52,6 @@
             echo Close('div');
             
             echo LineBreak(3, array('class'=>'clr'));   
-            echo Close('div');
-        ?>                 
-     
+            echo Close('div');               
+echo Close('div');
 

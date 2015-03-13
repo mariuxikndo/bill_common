@@ -10,8 +10,16 @@ if(!empty($module_title)){
     $title_mod = $module_title;
 }
 echo input(array('type'=>'hidden', 'name'=>'numdecimales', 'id'=>'numdecimales', 'value'=>  get_settings('NUM_DECIMALES')));
-?>
 
+?>
+<style>
+    /*@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400');*/
+     .navbar-default {
+            background-image: linear-gradient(to bottom, <?= get_settings('NAV_COLOR')?> 0px, <?= get_settings('NAV_COLOR')?> 100%);
+            background-color: <?= get_settings('NAV_COLOR')?>;
+            border-color: #34b617;
+    }
+</style>
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0;font-family: 'lucida grande',tahoma,verdana,arial,sans-serif">
             <div class="navbar-header">
