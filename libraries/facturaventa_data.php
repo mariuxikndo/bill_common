@@ -60,7 +60,7 @@ class Facturaventa_data {
                 'secuenciafactventa',
             );
             $ndc = $this->ci->generic_model->get('billing_facturaventa', array('codigofactventa' => $fact->venta_id), $fields, null, 1);            
-            $fact->fact_ndc = $fact->establecimiento.$fact->puntoemision.'-'.$fact->secuenciafactventa;
+            $fact->fact_ndc = $ndc->establecimiento.$ndc->puntoemision.'-'.$ndc->secuenciafactventa;
         }
         return $fact;
     }
