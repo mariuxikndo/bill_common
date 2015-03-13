@@ -53,7 +53,15 @@
                             <td><?php echo $d->Producto_codigo; ?></td>
                             <td></td>
                             <td><?php echo $d->itemcantidad; ?></td>
-                            <td><?php echo $this->generic_model->get_val_where('billing_producto', array('billing_producto.codigo' => $d->Producto_codigo), 'nombreUnico', null, -1); ?></td>
+                            <?php
+                                echo Open('td');
+                                if(!empty($d->detalle)){
+                                    echo $d->detalle;
+                                }else{
+                                    echo $this->generic_model->get_val_where('billing_producto', array('billing_producto.codigo' => $d->Producto_codigo), 'nombreUnico', null, -1);                                    
+                                }
+                                echo Close('td');
+                            ?>
                             <td></td>
                             <td><?php echo number_decimal($d->itempreciobruto); ?></td>
                             <td><?php echo number_decimal($d->descuentofactvalor); ?></td>
