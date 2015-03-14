@@ -18,6 +18,7 @@ $css = array(
     base_url('resources/js/libs/sco.js/css/sco.message.css'),
     base_url('resources/js/libs/jsPanel-bootstrap/source/jsPanel.css'),
     base_url('resources/js/libs/autosuggest/css/style.css'),
+    base_url('resources/js/libs/pick-a-color/build/1.2.3/css/pick-a-color-1.2.3.min.css'),
     base_url('resources/css/style.css'),     
 );
 echo csslink($css);
@@ -49,6 +50,8 @@ $js = array(
     base_url('resources/js/libs/combobox/js/bootstrap-combobox.js'),
     base_url('resources/js/libs/numeric/jquery.numeric.js'),
     base_url('resources/js/libs/combobox/js/bootstrap-combobox.js'),    
+    base_url('resources/js/libs/pick-a-color/build/dependencies/tinycolor-0.9.15.min.js'),    
+    base_url('resources/js/libs/pick-a-color/src/js/pick-a-color.js'),    
     base_url('resources/js/comunes/jquery.blockUI.js'),     
     base_url('resources/js/modules/comunes.js'),
 //    base_url('resources/js/modules/ajuste_entrada.js'),

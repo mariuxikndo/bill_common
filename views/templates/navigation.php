@@ -15,10 +15,18 @@ echo input(array('type'=>'hidden', 'name'=>'numdecimales', 'id'=>'numdecimales',
 <style>
     /*@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400');*/
      .navbar-default {
-            background-image: linear-gradient(to bottom, <?= get_settings('NAV_COLOR')?> 0px, <?= get_settings('NAV_COLOR')?> 100%);
-            background-color: <?= get_settings('NAV_COLOR')?>;
+            background-image: linear-gradient(to bottom, #<?= get_settings('NAV_COLOR')?> 0px, #<?= get_settings('NAV_COLOR')?> 100%);
+            background-color: #<?= get_settings('NAV_COLOR')?>;
             border-color: #34b617;
     }
+    
+    .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
+        /*background: none repeat-x scroll 50% 50% #<?= get_settings('NAV_COLOR')?>;*/
+        background-image: linear-gradient(to bottom, #<?= get_settings('NAV_COLOR')?> 99%, #fff 90%);        
+        border: 1px solid #bbb;
+        color: #fff;
+        font-weight: bold;
+    }    
 </style>
         <!-- Navigation -->
         <nav class="navbar navbar-default navbar-fixed-top" role="navigation" style="margin-bottom: 0;font-family: 'lucida grande',tahoma,verdana,arial,sans-serif">
@@ -45,7 +53,7 @@ echo input(array('type'=>'hidden', 'name'=>'numdecimales', 'id'=>'numdecimales',
             <ul class="nav navbar-top-links navbar-right">
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #026890">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #fff">
                         <i class="glyphicon glyphicon-th-list"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-alerts">
@@ -96,7 +104,7 @@ echo input(array('type'=>'hidden', 'name'=>'numdecimales', 'id'=>'numdecimales',
                 </li>
                 <!-- /.dropdown -->
                 <li class="dropdown">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #026890">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#" style="color: #fff">
                         <i class="fa fa-user fa-fw"></i>  <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
