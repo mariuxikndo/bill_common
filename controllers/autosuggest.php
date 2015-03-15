@@ -30,13 +30,19 @@ class Autosuggest extends MX_Controller{
                 
         function get_client_by_name( $param ) {
             $this->load->model('client_model');            
-            $res = $this->client_model->autosugest_by_name($param);
-            	            
-            if(!empty($res)) {
-                    echo json_encode($res);
-            } else {
-                    echo '{"id":"--","name":"No hay resultados para '.$param.'"}';
+            
+            if (!strpos($param, " ") AND (strlen($param) == 10 OR strlen($param) == 13) ){
+                $res = $this->get_client_by_ci($param);
+            }else{
+                $res = $this->client_model->autosugest_by_name($param);                
+                
+                if(!empty($res)) {
+                        echo json_encode($res);
+                } else {
+                        echo '{"id":"--","name":"No hay resultados para '.$param.'"}';
+                }                
             }
+                    
         }        
         
         function get_proveedor_by_name( $param ) {
