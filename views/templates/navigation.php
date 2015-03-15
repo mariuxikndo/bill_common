@@ -13,7 +13,6 @@ echo input(array('type'=>'hidden', 'name'=>'numdecimales', 'id'=>'numdecimales',
 
 ?>
 <style>
-    /*@import url('http://fonts.googleapis.com/css?family=Open+Sans:300,400');*/
      .navbar-default {
             background-image: linear-gradient(to bottom, #<?= get_settings('NAV_COLOR')?> 0px, #<?= get_settings('NAV_COLOR')?> 100%);
             background-color: #<?= get_settings('NAV_COLOR')?>;

@@ -46,14 +46,20 @@ class Autosuggest extends MX_Controller{
         }        
         
         function get_proveedor_by_name( $param ) {
-            $this->load->model('proveedor_model');            
-            $res = $this->proveedor_model->autosugest_by_name($param);
-            	            
-            if(!empty($res)) {
-                    echo json_encode($res);
-            } else {
-                    echo '{"id":"--","name":"No hay resultados para '.$param.'"}';
-            }
+            $this->load->model('proveedor_model'); 
+            
+                if (!strpos($param, " ") AND (strlen($param) == 10 OR strlen($param) == 13) ){
+                    $res = $this->get_proveedor_by_ci( $param );
+                }else{
+                    $res = $this->proveedor_model->autosugest_by_name($param);
+
+                    if(!empty($res)) {
+                            echo json_encode($res);
+                    } else {
+                            echo '{"id":"--","name":"No hay resultados para '.$param.'"}';
+                    }                            
+                }
+
         }
         
         function get_proveedor_by_ci( $param ) {
