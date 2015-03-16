@@ -35,7 +35,7 @@ class Tarjetacustodio {
     
     public function print_voucher_cust_by_id($id) {
         $res['voucher'] = $this->ci->generic_model->get_data( 'bill_tarjetascustodio', array( 'id'=>$id ), '', null, 0, null );        
-            $this->ci->load->view('comprobantes/voucher', $res);        
+            $this->ci->load->view('common/comprobantes/voucher', $res);        
     }    
     
     /* cobrar con tarjeta de credito/voucher */

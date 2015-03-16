@@ -35,7 +35,7 @@ class Chequecustodio {
     
     public function print_ch_cust_by_id($id) {
         $res['cheques'] = $this->ci->generic_model->get_data( 'bill_chequescustodio', array( 'id'=>$id ), '', null, 0, null );        
-            $this->ci->load->view('comprobantes/cheque', $res);        
+            $this->ci->load->view('common/comprobantes/cheque', $res);        
     }
     
     

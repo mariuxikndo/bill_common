@@ -57,7 +57,7 @@ class Comprobantepago {
         $res['proveedor'] = $this->ci->generic_model->get_by_id('billing_proveedor',$res['comprob_pago']->proveedor_id);
         $res['data_asiento'] = $this->obj_asientocontable->get_ac_data($tipotransaccion_cod, $doc_id);
         
-        $this->ci->load->view('comprobantes/comprobante_pago',$res);
+        $this->ci->load->view('common/comprobantes/comprobante_pago',$res);
     }
     
 }
