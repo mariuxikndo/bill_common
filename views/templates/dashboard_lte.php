@@ -52,7 +52,7 @@
             base_url('resources/js/libs/jsPanel-bootstrap/source/jsPanel.css'),
             base_url('resources/js/libs/autosuggest/css/style.css'),
             base_url('resources/js/libs/pick-a-color/build/1.2.3/css/pick-a-color-1.2.3.min.css'),
-//            base_url('resources/css/style.css'),     
+            base_url('resources/css/style.css'),     
         );
         echo csslink($css);    
     
@@ -115,7 +115,7 @@
         ?>
 
         <!-- Content Header (Page header) -->
-        <section class="content-header">
+        <section class="content-header col-md-12" style="background: #ddd; margin-bottom: 5px; padding: 2px; border-bottom: solid 1px #ddddee">
 <!--          <h1>
             Dashboard
             <small>Control panel</small>
