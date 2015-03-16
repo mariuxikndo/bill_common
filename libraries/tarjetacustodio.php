@@ -30,7 +30,7 @@ class Tarjetacustodio {
     
     public function print_voucher_custodio_by_doc($tipotransaccion_cod, $doc_id) {
         $res['voucher'] = $this->ci->generic_model->get_data( 'bill_tarjetascustodio', array( 'tipotransaccion_cod'=>$tipotransaccion_cod, 'docid'=>$doc_id ), '', null, 0, null );        
-            $this->ci->load->view('comprobantes/voucher', $res);
+            $this->ci->load->view('common/comprobantes/voucher', $res);
     }
     
     public function print_voucher_cust_by_id($id) {
