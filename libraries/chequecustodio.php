@@ -30,7 +30,7 @@ class Chequecustodio {
     
     public function print_ch_custodio_by_doc($tipotransaccion_cod, $doc_id) {
         $res['cheques'] = $this->ci->generic_model->get_data( 'bill_chequescustodio', array( 'tipotransaccion_cod'=>$tipotransaccion_cod, 'docid'=>$doc_id ), '', null, 0, null );        
-            $this->ci->load->view('comprobantes/cheque', $res);
+            $this->ci->load->view('common/comprobantes/cheque', $res);
     }
     
     public function print_ch_cust_by_id($id) {
