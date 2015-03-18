@@ -115,7 +115,7 @@
         ?>
 
         <!-- Content Header (Page header) -->
-        <section class="content-header col-md-12" id="content" style="background: #ddd; margin-bottom: 5px; padding: 2px; border-bottom: solid 1px #ddddee">
+        <section class="content-header col-md-12" style="background: #ddd; margin-bottom: 5px; padding: 2px; border-bottom: solid 1px #ddddee">
 <!--          <h1>
             Dashboard
             <small>Control panel</small>
@@ -132,7 +132,7 @@
         </section>
         
         <!-- Main content -->
-        <section class="content">
+        <section class="content" id="content">
           <!-- Main row -->
           <div class="row">
               <?php
