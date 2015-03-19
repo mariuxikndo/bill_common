@@ -84,7 +84,8 @@ class Facturaventa_data {
             'itempreciobruto',
             'descuentofactvalor',
             'itemprecioxcantidadneto',
-            'detalle'
+            'detalle',
+            'meses_garantia'
         );
         $factura_detalle = $this->ci->generic_model->get('billing_facturaventadetalle', array('facturaventa_codigofactventa' => $codFact), $fields, 0);
         return $factura_detalle;

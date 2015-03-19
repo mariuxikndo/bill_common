@@ -39,6 +39,7 @@ class facturacompra_data {
             'billing_facturacompra.tarifadocebruto',
             'billing_facturacompra.recargovalor',
             'billing_facturacompra.pa_sriautorizaciondocs_tiposcomprobante_cod tipocomprobante_cod',
+            'billing_facturacompra.compra_id',
             'billing_bodega.nombre bodega_name',
             'bill_compratipo.tipo tipo_compra',
             'prov.PersonaComercio_cedulaRuc',
@@ -78,11 +79,11 @@ class facturacompra_data {
         
         $res_head['fact_data'] = $fact;
             if( $fact->tipocomprobante_cod == '01' ){
-                $this->ci->load->view('compras/comprahead',$res_head);                
+                echo $this->ci->load->view('compras/comprahead',$res_head, TRUE);
             }elseif( $fact->tipocomprobante_cod == '16' ){
-                $this->ci->load->view('compras/form_exportacion_head',$res_head,TRUE);                
+                echo $this->ci->load->view('compras/form_exportacion_head',$res_head,TRUE);                
             }elseif( $fact->tipocomprobante_cod == '04' ){
-                $this->ci->load->view('compras/ndc_head',$res_head,TRUE);
+                echo $this->ci->load->view('compras/ndc_head',$res_head,TRUE);
             }        
         
         $this->ci->load->view('common/comprobantes/factura_compra', $data);

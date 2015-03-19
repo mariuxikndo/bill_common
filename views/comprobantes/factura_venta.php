@@ -61,6 +61,7 @@
                 'Cod.',
                 'Cant.',
                 'Desc.',
+                'Garantia',
                 'P. Unit.',
                 'Desc.',
                 'P. Total'
@@ -79,6 +80,7 @@
                                 echo tagcontent( 'td', $this->generic_model->get_val_where('billing_producto', array('billing_producto.codigo' => $d->Producto_codigo), 'nombreUnico', null, -1) );                                
                             }
                             
+                            echo tagcontent('td', $d->meses_garantia.' meses');
                             echo tagcontent('td', number_decimal($d->itempreciobruto));
                             echo tagcontent('td', number_decimal($d->descuentofactvalor));
                             echo tagcontent('td', number_decimal($d->itemprecioxcantidadneto));
