@@ -51,7 +51,7 @@ class Client {
                     'billing_cliente c', 
                     array('c.PersonaComercio_cedulaRuc'=>$client_id),
                     $join_cluase, 
-                    'c.PersonaComercio_cedulaRuc, c.nombres, c.apellidos, c.razonsocial razonsocial, c.direccion, c.diasCredito dias_credito, c.telefonos, c.celular, c.email, c.clientetipo_idclientetipo tipo_id, c.descuentomaxporcent desc_client, c.cupocredito cupo_credito, c.vendedor_id vendedor_id,ct.descuento desc_ct', 
+                    'c.PersonaComercio_cedulaRuc, c.nombres, c.apellidos, c.razonsocial razonsocial, c.direccion, c.diasCredito dias_credito, c.telefonos, c.celular, c.email, c.clientetipo_idclientetipo tipo_id, c.descuentomaxporcent desc_client, c.cupocredito cupo_credito, c.vendedor_id vendedor_id, ct.descuento desc_ct', 
                     1 
                 );
         return $client_data;
