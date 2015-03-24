@@ -5,7 +5,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+if($recibo->estado == -1){
+    echo error_info_msg(' Este recibo esta anulado.');
+}
 echo tagcontent('button', '<span class="glyphicon glyphicon-print"></span> Imprimir Comprobante Ingreso', array('id'=>'printbtn','data-target'=>'comprob_pago_print','class'=>'btn btn-default pull-left'));
 echo lineBreak2(1, array('style'=>'clear:both'));
 echo Open('div',array('class'=>'col-md-12','id'=>'comprob_pago_print','style'=>'font-size:16px;font-family:monospaced'));

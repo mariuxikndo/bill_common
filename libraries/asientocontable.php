@@ -41,7 +41,12 @@ class Asientocontable {
                '1' => array('table'=>'billing_contacuentasplan pl','condition'=>'acd.cuenta_cont_id = pl.cod'),
                '2' => array('table'=>'billing_empleado empl','condition'=>'ac.user_id = empl.id')
             );
-        $where_data = array('ac.tipotransaccion_cod'=>$tipo_trans,'ac.doc_id'=>$doc_id,'ac.estado'=>$estado);
+        
+        if($estado == ''){
+            $where_data = array( 'ac.tipotransaccion_cod'=>$tipo_trans,'ac.doc_id'=>$doc_id );
+        }else{
+            $where_data = array( 'ac.tipotransaccion_cod'=>$tipo_trans,'ac.doc_id'=>$doc_id,'ac.estado'=>$estado );
+        }
         
         $ac_data = $this->ci->generic_model->get_join(
                     'bill_asiento_contable ac', 
