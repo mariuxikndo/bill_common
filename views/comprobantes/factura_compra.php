@@ -5,6 +5,8 @@
                 echo tagcontent('div', '<strong>FACT. PENDIENT No.</strong>'.$factura->establecimiento.$factura->puntoemision.'-'.str_pad($factura->secuencia, 9, '0', STR_PAD_LEFT), array('class'=>'col-md-6'));
             }elseif($factura->estado == 2){
                 echo tagcontent('div', '<strong>FACTURA No.</strong>'.$factura->establecimiento.$factura->puntoemision.'-'.str_pad($factura->secuencia, 9, '0', STR_PAD_LEFT), array('class'=>'col-md-6'));
+            }elseif($factura->estado == -2){
+                echo tagcontent('div', '<strong>FACT. ANULADA No.</strong>'.$factura->establecimiento.$factura->puntoemision.'-'.str_pad($factura->secuencia, 9, '0', STR_PAD_LEFT), array('class'=>'col-md-6'));                
             }
         ?>
         
