@@ -41,7 +41,7 @@ echo Open('div',array('class'=>'col-md-12','id'=>'comprob_pago_print','style'=>'
     echo lineBreak2(1, array('class'=>'clr'));
     echo tagcontent('div', 'Usuario: '.$data_asiento[0]->user_nombres.$data_asiento[0]->user_apellidos, array('class'=>'col-md-6'));
     echo tagcontent('div', 'Cliente: '.$cliente->nombres.' '.$cliente->apellidos, array('class'=>'col-md-6'));
-    
+    echo tagcontent('div', 'Nota: '.$recibo->nota, array('class'=>'col-md-12'));
 echo Close('div');
 echo lineBreak2(1, array('class'=>'clr'));
 
