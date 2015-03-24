@@ -18,6 +18,8 @@
                 }else{
                     echo tagcontent('div', '<strong>PRE-'.$doc_label.' No.</strong>'.$factura->codigofactventa, array('class'=>'col-md-6'));
                 }
+            }elseif($factura->estado == -2 OR $factura->estado == -1){
+                echo tagcontent('div', '<strong>'.$doc_label.' ANULADA No.</strong>'.$factura->codigofactventa, array('class'=>'col-md-6'));                
             }            
         ?>
             <div class="col-md-6 pull-right">
