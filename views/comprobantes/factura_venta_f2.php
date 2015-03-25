@@ -16,6 +16,6 @@ echo Close('div');
 
 echo Open('div', array('id' => 'puntoventaprint_view', 'class' => 'container', 'style' => 'font-family:monospace'));
     $this->load->view('factura_venta_f3', $data);
-echo Close('div');   
+echo Close('div');
 
 
