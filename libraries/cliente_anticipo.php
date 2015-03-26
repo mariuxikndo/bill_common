@@ -71,6 +71,36 @@ class Cliente_anticipo {
         public function get_anticipo_saldo($client_id) {
            $saldo_client = $this->ci->generic_model->get_val_where( 'bill_cliente_anticipo_saldos', array('client_id'=>$client_id) , 'saldo', '', 0 );        
            return $saldo_client;
-        }        
+        }
         
+        public function anular_anticipo($anticipo_id, $detalle_anulacion = 'ANULACION DEL ANTICIPO') {
+            $res = false;
+            if($anticipo_id > 0){                
+                $anticipo_data = $this->ci->generic_model->get_by_id('bill_cliente_anticipo', $anticipo_id);
+                
+                $tot_anticipo = $this->get_anticipo_saldo($anticipo_data->client_id);
+
+                    /* 
+                     * Solo si el total de anticipos disponibles es mayor al anticipo que se va a anular lo permito
+                     * caso contrario ya no es posible 
+                     */
+                    if( $tot_anticipo >= $anticipo_data->anticipo ){
+                        $detalle = $detalle_anulacion;
+                        $regreso_anticipo = $this->save_anticipo_data($anticipo_data->client_id, $anticipo_data->anticipo * -1, $anticipo_data->id, $detalle, $detalle_anulacion );
+
+                        if( $regreso_anticipo > 0 ){
+                            $this->ci->generic_model->update( 'bill_cliente_anticipo', array('estado'=>'-1','detalle_anulacion'=>$detalle_anulacion,'user_id_anulacion'=>$this->ci->user->id), array('id'=>$anticipo_id) );
+                            echo info_msg('Se ha anulado el anticipo.');
+                            $res = true;
+                        }else{
+                            echo warning_msg('No fue posible anular el anticipo.');
+                            return false;
+                        }   
+                    }else{
+                        echo warning_msg('El cliente dispone de un saldo de anticipos menor('.$tot_anticipo.')  al que intenta anular ('.$anticipo_data->anticipo.').');
+                        return false;
+                    }
+            }
+            return $res;
+        }        
 }
